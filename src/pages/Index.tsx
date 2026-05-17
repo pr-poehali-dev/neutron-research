@@ -4,12 +4,12 @@ export default function Index() {
       <div className="grain-overlay" />
 
       <header className="header">
-        <div className="logo">VINYL*DINER</div>
+        <div className="logo">БАРХАТНЫЙ*ДВОРЕЦ</div>
         <nav>
           <a href="#">Меню</a>
           <a href="#">О нас</a>
-          <a href="#">Афиша</a>
-          <a href="#">Адреса</a>
+          <a href="#">Атмосфера</a>
+          <a href="#">Контакты</a>
         </nav>
         <button className="btn-cta">Забронировать</button>
       </header>
@@ -18,16 +18,16 @@ export default function Index() {
         <section className="hero">
           <div className="hero-content">
             <h1 className="hero-title">
-              БЕЗ ПОНТОВ,
+              ВКУС
               <br />
-              ТОЛЬКО <span>ВКУС</span>
+              ГРУЗИИ <span>в сердце</span>
             </h1>
             <p className="text-base md:text-lg lg:text-xl mb-8 md:mb-10 leading-relaxed text-[#555]">
-              Эстетика 70-х в современной подаче. Локальные продукты, огненные блюда и атмосфера для настоящих ценителей.
+              Настоящая грузинская кухня с теплом домашнего очага. Хинкали, мцвади, вино из Кахетии — всё как у бабушки в Тбилиси.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 sm:gap-5">
               <button className="btn-cta" style={{ background: "var(--primary)", color: "white" }}>
-                Заказать
+                Забронировать стол
               </button>
               <button className="btn-cta" style={{ background: "white" }}>
                 Смотреть меню
@@ -36,23 +36,23 @@ export default function Index() {
           </div>
           <div className="hero-img">
             <div className="sticker">
-              СВЕЖАК
+              СВЕЖЕЕ
               <br />
               КАЖДЫЙ ДЕНЬ
             </div>
             <div className="floating-tag hidden md:block" style={{ top: "20%", left: "10%" }}>
-              #ЭСТЕТИКА
+              #ГРУЗИЯ
             </div>
             <div className="floating-tag hidden md:block" style={{ bottom: "30%", right: "20%" }}>
-              ОГОНЬ
+              ГАМАРДЖОБА
             </div>
           </div>
         </section>
 
         <div className="marquee">
           <div className="marquee-content">
-            &nbsp; * БУРГЕРЫ КОТОРЫЕ РВУТ * КРАФТОВЫЕ КОКТЕЙЛИ * ТОЛЬКО РЕТРО ВАЙБ * ОТКРЫТЫ ДО 2:00 * ЛУЧШИЕ В ГОРОДЕ *
-            БУРГЕРЫ КОТОРЫЕ РВУТ * КРАФТОВЫЕ КОКТЕЙЛИ * ТОЛЬКО РЕТРО ВАЙБ * ОТКРЫТЫ ДО 2:00 * ЛУЧШИЕ В ГОРОДЕ
+            &nbsp; * ХИНКАЛИ КАК В ТБИЛИСИ * ВИНО ИЗ КАХЕТИИ * МЦВАДИ НА ЖИВОМ ОГНЕ * ОТКРЫТЫ ДО 23:00 * НАСТОЯЩАЯ ГРУЗИЯ *
+            ХИНКАЛИ КАК В ТБИЛИСИ * ВИНО ИЗ КАХЕТИИ * МЦВАДИ НА ЖИВОМ ОГНЕ * ОТКРЫТЫ ДО 23:00 * НАСТОЯЩАЯ ГРУЗИЯ
           </div>
         </div>
 
@@ -73,8 +73,8 @@ export default function Index() {
             <div className="menu-card">
               <span className="menu-tag">Хит продаж</span>
               <img
-                src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
-                alt="Классический бургер"
+                src="https://cdn.poehali.dev/projects/8c6705c4-71ae-4c99-9829-acba1c79f502/files/ded20837-22ca-4aaa-b864-2fa93d1f1567.jpg"
+                alt="Хинкали"
               />
               <div className="menu-card-body">
                 <div
@@ -85,11 +85,11 @@ export default function Index() {
                     marginBottom: "10px",
                   }}
                 >
-                  <h3>Классика</h3>
-                  <span className="price">1 400 ₽</span>
+                  <h3>Хинкали с мясом</h3>
+                  <span className="price">650 ₽</span>
                 </div>
                 <p style={{ fontSize: "14px", color: "#666" }}>
-                  Тройной смэш из мраморной говядины, фирменный соус, маринованные огурцы на бриоши.
+                  Сочные хинкали с говядиной и свининой, зеленью и пряностями по старинному тбилисскому рецепту.
                 </p>
               </div>
             </div>
@@ -97,11 +97,11 @@ export default function Index() {
             {/* Item 2 */}
             <div className="menu-card">
               <span className="menu-tag" style={{ background: "var(--secondary)" }}>
-                Острое
+                Со огня
               </span>
               <img
-                src="https://images.unsplash.com/photo-1513104890138-7c749659a591?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
-                alt="Неоновая пицца"
+                src="https://cdn.poehali.dev/projects/8c6705c4-71ae-4c99-9829-acba1c79f502/files/165b0ad0-8dc0-4281-94ce-0bcecf91d76c.jpg"
+                alt="Мцвади"
               />
               <div className="menu-card-body">
                 <div
@@ -112,10 +112,10 @@ export default function Index() {
                     marginBottom: "10px",
                   }}
                 >
-                  <h3>Электро Пепперони</h3>
-                  <span className="price">1 800 ₽</span>
+                  <h3>Мцвади</h3>
+                  <span className="price">1 200 ₽</span>
                 </div>
-                <p style={{ fontSize: "14px", color: "#666" }}>Двойная пепперони, острый мёд, тесто на закваске.</p>
+                <p style={{ fontSize: "14px", color: "#666" }}>Шашлык из телятины на живом огне с зеленью, луком и гранатом.</p>
               </div>
             </div>
 
@@ -125,8 +125,8 @@ export default function Index() {
                 Популярное
               </span>
               <img
-                src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
-                alt="Диско Сауэр"
+                src="https://cdn.poehali.dev/projects/8c6705c4-71ae-4c99-9829-acba1c79f502/files/84d580ec-1bf5-4594-bc5a-bee40ad92736.jpg"
+                alt="Вино Кахетия"
               />
               <div className="menu-card-body">
                 <div
@@ -137,11 +137,11 @@ export default function Index() {
                     marginBottom: "10px",
                   }}
                 >
-                  <h3>Диско Сауэр</h3>
-                  <span className="price">1 200 ₽</span>
+                  <h3>Вино Кахети</h3>
+                  <span className="price">900 ₽</span>
                 </div>
                 <p style={{ fontSize: "14px", color: "#666" }}>
-                  Джин, цветок бузины, голубой чай и съедобная золотая пыльца.
+                  Домашнее красное вино из Кахетии, выдержанное в традиционных квеври. Насыщенный вкус и аромат.
                 </p>
               </div>
             </div>
@@ -150,10 +150,9 @@ export default function Index() {
 
         <section className="retro-vibe">
           <div>
-            <h2 className="vibe-title">ВАЙБ-ЧЕК ПРОЙДЕН.</h2>
+            <h2 className="vibe-title">АТМОСФЕРА ДВОРЦА.</h2>
             <p className="vibe-text">
-              Мы не просто кормим. Мы создаём моменты. От плейлиста хип-хопа 90-х до диванов в стиле 70-х — каждый уголок
-              продуман для твоего идеального кадра. Бронь не нужна, просто приходи с настроением.
+              Мы не просто кормим — мы переносим вас в Грузию. Живая музыка, тёплый свет свечей, деревянные своды и запах специй. Каждый вечер здесь — как праздник в кругу семьи. Стол накроем и расскажем историю каждого блюда.
             </p>
             <button className="btn-cta" style={{ background: "var(--dark)", color: "white", borderColor: "white" }}>
               Наша история
@@ -164,31 +163,31 @@ export default function Index() {
 
         <section className="section-padding">
           <h2 className="section-title" style={{ marginBottom: "40px", textAlign: "center" }}>
-            @VINYL.DINER
+            @BARKHATNYI.DVORETS
           </h2>
           <div className="social-grid">
             <div className="social-item">
               <img
-                src="https://images.unsplash.com/photo-1467003909585-2f8a72700288?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
-                alt="Инста 1"
+                src="https://cdn.poehali.dev/projects/8c6705c4-71ae-4c99-9829-acba1c79f502/files/4cf2233c-ffa3-4223-a480-0c1e4c23c1e1.jpg"
+                alt="Атмосфера"
               />
             </div>
             <div className="social-item">
               <img
-                src="https://images.unsplash.com/photo-1534353473418-4cfa6c56fd38?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
-                alt="Инста 2"
+                src="https://cdn.poehali.dev/projects/8c6705c4-71ae-4c99-9829-acba1c79f502/files/ded20837-22ca-4aaa-b864-2fa93d1f1567.jpg"
+                alt="Хинкали"
               />
             </div>
             <div className="social-item">
               <img
-                src="https://images.unsplash.com/photo-1497034825429-c343d7c6a68f?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
-                alt="Инста 3"
+                src="https://cdn.poehali.dev/projects/8c6705c4-71ae-4c99-9829-acba1c79f502/files/165b0ad0-8dc0-4281-94ce-0bcecf91d76c.jpg"
+                alt="Мцвади"
               />
             </div>
             <div className="social-item">
               <img
-                src="https://images.unsplash.com/photo-1559339352-11d035aa65de?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
-                alt="Инста 4"
+                src="https://cdn.poehali.dev/projects/8c6705c4-71ae-4c99-9829-acba1c79f502/files/84d580ec-1bf5-4594-bc5a-bee40ad92736.jpg"
+                alt="Вино"
               />
             </div>
           </div>
@@ -197,9 +196,9 @@ export default function Index() {
 
       <footer>
         <div>
-          <div className="footer-logo">VINYL*DINER</div>
+          <div className="footer-logo">БАРХАТНЫЙ*ДВОРЕЦ</div>
           <p style={{ color: "#666", lineHeight: 1.6 }}>
-            Твоё место для еды высокого качества и лоу-фай атмосферы. С 2024, но ощущается как 1974.
+            Грузинский ресторан с душой. Настоящие рецепты, живое вино и тепло Кавказа — с 2024 года в вашем городе.
           </p>
         </div>
         <div className="footer-links">
@@ -222,7 +221,7 @@ export default function Index() {
             </li>
             <li>
               <a href="#" style={{ color: "inherit", textDecoration: "none" }}>
-                Условия
+                Контакты
               </a>
             </li>
           </ul>
@@ -230,16 +229,19 @@ export default function Index() {
         <div className="footer-links">
           <h4>Часы работы</h4>
           <ul>
-            <li>Вт-Чт: 12:00 - 23:00</li>
-            <li>Пт-Сб: 12:00 - 02:00</li>
-            <li>Вс: 11:00 - 21:00</li>
-            <li>Пн: Выходной</li>
+            <li>Пн–Чт: 12:00–23:00</li>
+            <li>Пт–Сб: 12:00–01:00</li>
+            <li>Вс: 12:00–22:00</li>
           </ul>
         </div>
-        <div className="footer-bottom">
-          <span>2025 VINYL DINER</span>
-          <span>ВКУС КЛАССИКИ</span>
-          <span>IG / TW / TK</span>
+        <div className="footer-links">
+          <h4>Контакты</h4>
+          <ul>
+            <li>+7 (495) 000-00-00</li>
+            <li>info@barkhatnyi.ru</li>
+            <li>Instagram</li>
+            <li>Telegram</li>
+          </ul>
         </div>
       </footer>
     </>
