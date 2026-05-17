@@ -279,6 +279,37 @@ export default function Index() {
           <div className="vibe-img"></div>
         </section>
 
+        <section className="section-padding" style={{ borderTop: "var(--border)" }}>
+          <h2 className="section-title" style={{ marginBottom: "40px", textAlign: "center" }}>ГОСТИ О НАС</h2>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr", gap: "20px" }}>
+            {[
+              { name: "Анна К.", city: "Москва", text: "Хинкали — лучшие, что я пробовала в Москве. Тесто тонкое, бульон внутри сочный, специи прямо как в Тбилиси. Обязательно вернёмся!", stars: 5 },
+              { name: "Михаил Р.", city: "Москва", text: "Отмечали день рождения. Оджахури на кеци, вино из Кахетии и живая музыка вечером — всё было на высшем уровне. Персонал внимательный и очень душевный.", stars: 5 },
+              { name: "Елена В.", city: "Подмосковье", text: "Хачапури по-аджарски просто тают во рту. Атмосфера тёплая, уютная — чувствуешь себя как в гостях у грузинской семьи. Рекомендую всем друзьям!", stars: 5 },
+              { name: "Дмитрий С.", city: "Москва", text: "Чанахи в горшочке — невероятно ароматное. Порции большие, цены адекватные. Стали ходить сюда каждую пятницу — уже как домой.", stars: 5 },
+            ].map((review) => (
+              <div
+                key={review.name}
+                style={{
+                  padding: "24px", border: "var(--border)", background: "white",
+                  boxShadow: "4px 4px 0 var(--dark)",
+                }}
+              >
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "12px", flexWrap: "wrap", gap: "8px" }}>
+                  <div>
+                    <div style={{ fontWeight: 800, fontSize: "16px", textTransform: "uppercase" }}>{review.name}</div>
+                    <div style={{ fontSize: "13px", color: "#888" }}>{review.city}</div>
+                  </div>
+                  <div style={{ color: "var(--accent)", fontSize: "20px", filter: "brightness(0.7)" }}>
+                    {"★".repeat(review.stars)}
+                  </div>
+                </div>
+                <p style={{ fontSize: "15px", color: "#444", lineHeight: 1.6, fontStyle: "italic" }}>«{review.text}»</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
         <section className="section-padding">
           <h2 className="section-title" style={{ marginBottom: "40px", textAlign: "center" }}>
             @BARKHATNYI.DVORETS
