@@ -257,7 +257,7 @@ export default function Index() {
           <h4>Контакты</h4>
           <ul>
             <li>Москва, Дубравная ул., 39</li>
-            <li>+7 (495) 000-00-00</li>
+            <li><a href="tel:+79013697851" style={{ color: "inherit", textDecoration: "none" }}>8 (901) 369-78-51</a></li>
             <li>
               <a href="https://t.me/o_5ks" target="_blank" rel="noopener noreferrer" style={{ color: "inherit", textDecoration: "none" }}>
                 Telegram
