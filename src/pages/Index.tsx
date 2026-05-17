@@ -194,6 +194,23 @@ export default function Index() {
             </div>
           </div>
         </section>
+
+        <section className="section-padding" style={{ borderTop: "var(--border)", padding: 0 }}>
+          <div style={{ padding: "40px 20px 0" }}>
+            <h2 className="section-title" style={{ marginBottom: "30px", textAlign: "center" }}>КАК НАС НАЙТИ</h2>
+            <p style={{ textAlign: "center", fontWeight: 700, fontSize: "18px", marginBottom: "20px", textTransform: "uppercase" }}>
+              Москва, Дубравная улица, д. 39
+            </p>
+          </div>
+          <iframe
+            src="https://yandex.ru/map-widget/v1/?text=Москва%2C+Дубравная+улица+39&z=16&l=map"
+            width="100%"
+            height="400"
+            style={{ border: "none", borderTop: "var(--border)", display: "block" }}
+            allowFullScreen
+            title="Карта"
+          />
+        </section>
       </main>
 
       <footer>
@@ -239,10 +256,13 @@ export default function Index() {
         <div className="footer-links">
           <h4>Контакты</h4>
           <ul>
+            <li>Москва, Дубравная ул., 39</li>
             <li>+7 (495) 000-00-00</li>
-            <li>info@barkhatnyi.ru</li>
-            <li>Instagram</li>
-            <li>Telegram</li>
+            <li>
+              <a href="https://t.me/o_5ks" target="_blank" rel="noopener noreferrer" style={{ color: "inherit", textDecoration: "none" }}>
+                Telegram
+              </a>
+            </li>
           </ul>
         </div>
       </footer>
