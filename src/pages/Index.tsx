@@ -1,6 +1,128 @@
+import { useState } from "react";
+
+const BOOKING_URL = "https://functions.poehali.dev/4743a1d5-4bb2-46ab-b888-c7cf4f24cf16";
+
+function BookingModal({ onClose }: { onClose: () => void }) {
+  const [form, setForm] = useState({ name: "", phone: "", date: "", guests: "", comment: "" });
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setStatus("loading");
+    try {
+      const res = await fetch(BOOKING_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      if (res.ok) {
+        setStatus("success");
+      } else {
+        setStatus("error");
+      }
+    } catch {
+      setStatus("error");
+    }
+  };
+
+  return (
+    <div
+      style={{
+        position: "fixed", inset: 0, background: "rgba(0,0,0,0.7)", zIndex: 9999,
+        display: "flex", alignItems: "center", justifyContent: "center", padding: "20px",
+      }}
+      onClick={(e) => e.target === e.currentTarget && onClose()}
+    >
+      <div style={{
+        background: "var(--bg)", border: "var(--border)", boxShadow: "var(--shadow)",
+        padding: "40px", maxWidth: "500px", width: "100%", position: "relative",
+      }}>
+        <button
+          onClick={onClose}
+          style={{
+            position: "absolute", top: "15px", right: "15px", background: "none",
+            border: "none", fontSize: "24px", cursor: "pointer", fontWeight: 800,
+          }}
+        >×</button>
+
+        {status === "success" ? (
+          <div style={{ textAlign: "center", padding: "20px 0" }}>
+            <div style={{ fontSize: "48px", marginBottom: "16px" }}>🍷</div>
+            <h3 style={{ fontFamily: "Unbounded, sans-serif", fontSize: "24px", marginBottom: "12px" }}>
+              ЗАЯВКА ПРИНЯТА!
+            </h3>
+            <p style={{ color: "#666" }}>Мы свяжемся с вами в ближайшее время для подтверждения брони.</p>
+            <button className="btn-cta" style={{ marginTop: "24px", background: "var(--primary)", color: "white" }} onClick={onClose}>
+              Закрыть
+            </button>
+          </div>
+        ) : (
+          <form onSubmit={handleSubmit}>
+            <h3 style={{ fontFamily: "Unbounded, sans-serif", fontSize: "22px", marginBottom: "24px", textTransform: "uppercase" }}>
+              Забронировать стол
+            </h3>
+            {[
+              { name: "name", placeholder: "Ваше имя *", required: true },
+              { name: "phone", placeholder: "Телефон *", required: true },
+              { name: "date", placeholder: "Дата и время (например: 25 мая, 19:00)" },
+              { name: "guests", placeholder: "Количество гостей" },
+            ].map((field) => (
+              <input
+                key={field.name}
+                name={field.name}
+                placeholder={field.placeholder}
+                required={field.required}
+                value={form[field.name as keyof typeof form]}
+                onChange={handleChange}
+                style={{
+                  width: "100%", padding: "12px 16px", border: "var(--border)",
+                  background: "white", fontFamily: "Montserrat, sans-serif",
+                  fontWeight: 600, fontSize: "14px", marginBottom: "12px", display: "block",
+                }}
+              />
+            ))}
+            <textarea
+              name="comment"
+              placeholder="Комментарий (пожелания, повод)"
+              value={form.comment}
+              onChange={handleChange}
+              rows={3}
+              style={{
+                width: "100%", padding: "12px 16px", border: "var(--border)",
+                background: "white", fontFamily: "Montserrat, sans-serif",
+                fontWeight: 600, fontSize: "14px", marginBottom: "20px",
+                display: "block", resize: "vertical",
+              }}
+            />
+            {status === "error" && (
+              <p style={{ color: "var(--primary)", fontWeight: 700, marginBottom: "12px" }}>
+                Ошибка отправки. Попробуйте ещё раз или позвоните нам.
+              </p>
+            )}
+            <button
+              className="btn-cta"
+              type="submit"
+              disabled={status === "loading"}
+              style={{ background: "var(--primary)", color: "white", width: "100%" }}
+            >
+              {status === "loading" ? "Отправляем..." : "Отправить заявку"}
+            </button>
+          </form>
+        )}
+      </div>
+    </div>
+  );
+}
+
 export default function Index() {
+  const [showModal, setShowModal] = useState(false);
   return (
     <>
+      {showModal && <BookingModal onClose={() => setShowModal(false)} />}
       <div className="grain-overlay" />
 
       <header className="header">
@@ -11,7 +133,7 @@ export default function Index() {
           <a href="#">Атмосфера</a>
           <a href="#">Контакты</a>
         </nav>
-        <a href="https://t.me/o_5ks" target="_blank" rel="noopener noreferrer"><button className="btn-cta">Забронировать</button></a>
+        <button className="btn-cta" onClick={() => setShowModal(true)}>Забронировать</button>
       </header>
 
       <main>
@@ -26,11 +148,9 @@ export default function Index() {
               Настоящая грузинская кухня с теплом домашнего очага. Хинкали, мцвади, вино из Кахетии — всё как у бабушки в Тбилиси.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 sm:gap-5">
-              <a href="https://t.me/o_5ks" target="_blank" rel="noopener noreferrer">
-                <button className="btn-cta" style={{ background: "var(--primary)", color: "white" }}>
-                  Забронировать стол
-                </button>
-              </a>
+              <button className="btn-cta" style={{ background: "var(--primary)", color: "white" }} onClick={() => setShowModal(true)}>
+                Забронировать стол
+              </button>
               <button className="btn-cta" style={{ background: "white" }}>
                 Смотреть меню
               </button>
