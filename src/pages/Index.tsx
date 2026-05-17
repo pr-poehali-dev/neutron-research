@@ -1,5 +1,38 @@
 import { useState } from "react";
 
+const MENU = {
+  "Хинкали": [
+    { name: "Хинкали с говядиной и свининой", desc: "Классические тбилисские хинкали с сочной начинкой и ароматным бульоном внутри", price: "650 ₽", tag: "Хит" },
+    { name: "Хинкали с грибами", desc: "Нежные хинкали с лесными грибами и зеленью — для вегетарианцев", price: "580 ₽", tag: null },
+    { name: "Хинкали с сыром сулугуни", desc: "Хинкали с тянущимся сулугуни и свежей мятой", price: "600 ₽", tag: null },
+    { name: "Хинкали с бараниной", desc: "Хинкали по горскому рецепту с бараниной, луком и специями", price: "720 ₽", tag: "Новинка" },
+  ],
+  "Хачапури": [
+    { name: "Хачапури по-аджарски", desc: "Открытая лодочка с сулугуни, яйцом и сливочным маслом — классика Батуми", price: "780 ₽", tag: "Хит" },
+    { name: "Хачапури по-имеретински", desc: "Круглый хачапури с нежным имеретинским сыром внутри", price: "650 ₽", tag: null },
+    { name: "Хачапури по-мегрельски", desc: "Хачапури с сыром и сверху, и внутри — двойное удовольствие", price: "720 ₽", tag: null },
+    { name: "Хачапури с картофелем", desc: "Сытный хачапури с картошкой и сыром, обжаренный на сковороде", price: "590 ₽", tag: null },
+  ],
+  "Горячее": [
+    { name: "Мцвади (шашлык из телятины)", desc: "Шашлык из молодой телятины на живом огне, с гранатом и свежей зеленью", price: "1 200 ₽", tag: "С огня" },
+    { name: "Чахохбили из курицы", desc: "Тушёная курица в томатном соусе с чесноком, кинзой и грузинскими специями", price: "890 ₽", tag: null },
+    { name: "Оджахури", desc: "Жареное мясо с картофелем и овощами на кеци — традиционной глиняной сковороде", price: "980 ₽", tag: "Популярное" },
+    { name: "Чанахи", desc: "Томлёная баранина с баклажанами, картофелем и томатами в горшочке", price: "1 050 ₽", tag: null },
+  ],
+  "Закуски": [
+    { name: "Пхали ассорти", desc: "Пять видов пхали: шпинат, свёкла, морковь, фасоль и баклажан с орехами", price: "490 ₽", tag: null },
+    { name: "Баклажаны с орехами", desc: "Тонкие ломтики баклажана с ореховой начинкой, чесноком и зеленью", price: "420 ₽", tag: "Популярное" },
+    { name: "Лобиани", desc: "Пирог с острой фасолью и беконом, жаренный на масле", price: "380 ₽", tag: null },
+    { name: "Аджапсандали", desc: "Тёплое рагу из баклажанов, перца, томатов и специй", price: "450 ₽", tag: null },
+  ],
+  "Напитки": [
+    { name: "Вино Кахети красное", desc: "Домашнее красное вино из Кахетии, выдержанное в квеври. Насыщенный вкус", price: "900 ₽", tag: "Популярное" },
+    { name: "Вино Кахети белое", desc: "Янтарное белое вино с фруктовыми нотами — идеально к рыбе и сыру", price: "850 ₽", tag: null },
+    { name: "Лимонад тархун", desc: "Домашний лимонад с эстрагоном и лимоном — освежающий и ароматный", price: "290 ₽", tag: null },
+    { name: "Чай с чабрецом", desc: "Горный чай с чабрецом, мёдом и лимоном — согревает душу", price: "220 ₽", tag: null },
+  ],
+};
+
 const BOOKING_URL = "https://functions.poehali.dev/4743a1d5-4bb2-46ab-b888-c7cf4f24cf16";
 
 function BookingModal({ onClose }: { onClose: () => void }) {
@@ -118,6 +151,59 @@ function BookingModal({ onClose }: { onClose: () => void }) {
   );
 }
 
+function MenuSection() {
+  const [activeTab, setActiveTab] = useState(Object.keys(MENU)[0]);
+  const items = MENU[activeTab as keyof typeof MENU];
+  return (
+    <section className="section-padding" id="menu">
+      <div className="section-header">
+        <h2 className="section-title">НАШЕ МЕНЮ</h2>
+      </div>
+      <div style={{ display: "flex", gap: "10px", flexWrap: "wrap", marginBottom: "40px" }}>
+        {Object.keys(MENU).map((tab) => (
+          <button
+            key={tab}
+            className="btn-cta"
+            onClick={() => setActiveTab(tab)}
+            style={{
+              background: activeTab === tab ? "var(--primary)" : "white",
+              color: activeTab === tab ? "white" : "var(--dark)",
+              fontSize: "13px",
+            }}
+          >
+            {tab}
+          </button>
+        ))}
+      </div>
+      <div style={{ display: "grid", gridTemplateColumns: "1fr", gap: "16px" }}>
+        {items.map((item) => (
+          <div
+            key={item.name}
+            style={{
+              display: "flex", justifyContent: "space-between", alignItems: "center",
+              padding: "20px 24px", border: "var(--border)", background: "white",
+              boxShadow: "4px 4px 0 var(--dark)", gap: "16px",
+            }}
+          >
+            <div style={{ flex: 1 }}>
+              <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "6px", flexWrap: "wrap" }}>
+                <h3 style={{ fontSize: "16px", fontWeight: 800, textTransform: "uppercase" }}>{item.name}</h3>
+                {item.tag && (
+                  <span className="menu-tag" style={{ position: "static", fontSize: "11px", padding: "2px 10px" }}>
+                    {item.tag}
+                  </span>
+                )}
+              </div>
+              <p style={{ fontSize: "14px", color: "#666" }}>{item.desc}</p>
+            </div>
+            <span className="price" style={{ whiteSpace: "nowrap", flexShrink: 0 }}>{item.price}</span>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
 export default function Index() {
   const [showModal, setShowModal] = useState(false);
   return (
@@ -178,97 +264,7 @@ export default function Index() {
           </div>
         </div>
 
-        <section className="section-padding">
-          <div className="section-header">
-            <h2 className="section-title">ВЫБОР ШЕФА</h2>
-            <a
-              href="#"
-              className="text-sm md:text-base"
-              style={{ color: "var(--dark)", fontWeight: 800, textTransform: "uppercase" }}
-            >
-              Всё меню
-            </a>
-          </div>
-
-          <div className="menu-grid">
-            {/* Item 1 */}
-            <div className="menu-card">
-              <span className="menu-tag">Хит продаж</span>
-              <img
-                src="https://cdn.poehali.dev/projects/8c6705c4-71ae-4c99-9829-acba1c79f502/files/ded20837-22ca-4aaa-b864-2fa93d1f1567.jpg"
-                alt="Хинкали"
-              />
-              <div className="menu-card-body">
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                    marginBottom: "10px",
-                  }}
-                >
-                  <h3>Хинкали с мясом</h3>
-                  <span className="price">650 ₽</span>
-                </div>
-                <p style={{ fontSize: "14px", color: "#666" }}>
-                  Сочные хинкали с говядиной и свининой, зеленью и пряностями по старинному тбилисскому рецепту.
-                </p>
-              </div>
-            </div>
-
-            {/* Item 2 */}
-            <div className="menu-card">
-              <span className="menu-tag" style={{ background: "var(--secondary)" }}>
-                Со огня
-              </span>
-              <img
-                src="https://cdn.poehali.dev/projects/8c6705c4-71ae-4c99-9829-acba1c79f502/files/165b0ad0-8dc0-4281-94ce-0bcecf91d76c.jpg"
-                alt="Мцвади"
-              />
-              <div className="menu-card-body">
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                    marginBottom: "10px",
-                  }}
-                >
-                  <h3>Мцвади</h3>
-                  <span className="price">1 200 ₽</span>
-                </div>
-                <p style={{ fontSize: "14px", color: "#666" }}>Шашлык из телятины на живом огне с зеленью, луком и гранатом.</p>
-              </div>
-            </div>
-
-            {/* Item 3 */}
-            <div className="menu-card">
-              <span className="menu-tag" style={{ background: "var(--accent)", color: "var(--dark)" }}>
-                Популярное
-              </span>
-              <img
-                src="https://cdn.poehali.dev/projects/8c6705c4-71ae-4c99-9829-acba1c79f502/files/84d580ec-1bf5-4594-bc5a-bee40ad92736.jpg"
-                alt="Вино Кахетия"
-              />
-              <div className="menu-card-body">
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                    marginBottom: "10px",
-                  }}
-                >
-                  <h3>Вино Кахети</h3>
-                  <span className="price">900 ₽</span>
-                </div>
-                <p style={{ fontSize: "14px", color: "#666" }}>
-                  Домашнее красное вино из Кахетии, выдержанное в традиционных квеври. Насыщенный вкус и аромат.
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
+        <MenuSection />
 
         <section className="retro-vibe">
           <div>
