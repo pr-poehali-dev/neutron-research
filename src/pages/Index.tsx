@@ -214,10 +214,10 @@ export default function Index() {
       <header className="header">
         <div className="logo">БАРХАТНЫЙ*ДВОРЕЦ</div>
         <nav>
-          <a href="#">Меню</a>
-          <a href="#">О нас</a>
-          <a href="#">Атмосфера</a>
-          <a href="#">Контакты</a>
+          <a href="#menu">Меню</a>
+          <a href="#about">О нас</a>
+          <a href="#atmosphere">Атмосфера</a>
+          <a href="#contacts">Контакты</a>
         </nav>
         <button className="btn-cta" onClick={() => setShowModal(true)}>Забронировать</button>
       </header>
@@ -266,7 +266,7 @@ export default function Index() {
 
         <MenuSection />
 
-        <section className="retro-vibe">
+        <section className="retro-vibe" id="atmosphere">
           <div>
             <h2 className="vibe-title">АТМОСФЕРА ДВОРЦА.</h2>
             <p className="vibe-text">
@@ -342,7 +342,7 @@ export default function Index() {
           </div>
         </section>
 
-        <section className="section-padding" style={{ borderTop: "var(--border)", padding: 0 }}>
+        <section className="section-padding" id="contacts" style={{ borderTop: "var(--border)", padding: 0 }}>
           <div style={{ padding: "40px 20px 0" }}>
             <h2 className="section-title" style={{ marginBottom: "30px", textAlign: "center" }}>КАК НАС НАЙТИ</h2>
             <p style={{ textAlign: "center", fontWeight: 700, fontSize: "18px", marginBottom: "20px", textTransform: "uppercase" }}>
@@ -371,12 +371,12 @@ export default function Index() {
           <h4>Навигация</h4>
           <ul>
             <li>
-              <a href="#" style={{ color: "inherit", textDecoration: "none" }}>
+              <a href="#menu" style={{ color: "inherit", textDecoration: "none" }}>
                 Меню
               </a>
             </li>
             <li>
-              <a href="#" style={{ color: "inherit", textDecoration: "none" }}>
+              <a href="#atmosphere" style={{ color: "inherit", textDecoration: "none" }}>
                 О нас
               </a>
             </li>
@@ -386,7 +386,7 @@ export default function Index() {
               </a>
             </li>
             <li>
-              <a href="#" style={{ color: "inherit", textDecoration: "none" }}>
+              <a href="#contacts" style={{ color: "inherit", textDecoration: "none" }}>
                 Контакты
               </a>
             </li>
