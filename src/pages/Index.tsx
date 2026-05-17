@@ -11,7 +11,7 @@ export default function Index() {
           <a href="#">Атмосфера</a>
           <a href="#">Контакты</a>
         </nav>
-        <button className="btn-cta">Забронировать</button>
+        <a href="https://t.me/o_5ks" target="_blank" rel="noopener noreferrer"><button className="btn-cta">Забронировать</button></a>
       </header>
 
       <main>
@@ -26,9 +26,11 @@ export default function Index() {
               Настоящая грузинская кухня с теплом домашнего очага. Хинкали, мцвади, вино из Кахетии — всё как у бабушки в Тбилиси.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 sm:gap-5">
-              <button className="btn-cta" style={{ background: "var(--primary)", color: "white" }}>
-                Забронировать стол
-              </button>
+              <a href="https://t.me/o_5ks" target="_blank" rel="noopener noreferrer">
+                <button className="btn-cta" style={{ background: "var(--primary)", color: "white" }}>
+                  Забронировать стол
+                </button>
+              </a>
               <button className="btn-cta" style={{ background: "white" }}>
                 Смотреть меню
               </button>
