@@ -266,6 +266,7 @@ export default function Index() {
 
         <MenuSection />
 
+        <span id="about" style={{ position: "absolute" }} />
         <section className="retro-vibe" id="atmosphere">
           <div>
             <h2 className="vibe-title">АТМОСФЕРА ДВОРЦА.</h2>
