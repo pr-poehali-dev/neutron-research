@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const MENU = {
   "Хинкали": [
@@ -34,6 +34,7 @@ const MENU = {
 };
 
 const BOOKING_URL = "https://functions.poehali.dev/4743a1d5-4bb2-46ab-b888-c7cf4f24cf16";
+const REVIEWS_URL = "https://functions.poehali.dev/e11b5b2e-e4c3-4109-a212-a9dcf2d78c5a";
 
 function BookingModal({ onClose }: { onClose: () => void }) {
   const [form, setForm] = useState({ name: "", phone: "", date: "", guests: "", comment: "" });
@@ -204,6 +205,113 @@ function MenuSection() {
   );
 }
 
+type Review = { id: number; name: string; rating: number; text: string; created_at: string };
+
+function ReviewsSection() {
+  const [reviews, setReviews] = useState<Review[]>([]);
+  const [form, setForm] = useState({ name: "", rating: 5, text: "" });
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+
+  useEffect(() => {
+    fetch(REVIEWS_URL).then(r => r.json()).then(setReviews).catch(() => {});
+  }, []);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setStatus("loading");
+    try {
+      const res = await fetch(REVIEWS_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      if (res.ok) {
+        const newReview: Review = { id: Date.now(), ...form, created_at: new Date().toISOString() };
+        setReviews([newReview, ...reviews]);
+        setForm({ name: "", rating: 5, text: "" });
+        setStatus("success");
+        setTimeout(() => setStatus("idle"), 3000);
+      } else {
+        setStatus("error");
+      }
+    } catch {
+      setStatus("error");
+    }
+  };
+
+  return (
+    <section className="section-padding" id="reviews" style={{ background: "var(--cream)" }}>
+      <div className="section-header">
+        <h2 className="section-title">ОТЗЫВЫ ГОСТЕЙ</h2>
+      </div>
+
+      <div style={{ maxWidth: 600, margin: "0 auto 50px", background: "white", borderRadius: 16, padding: "32px", border: "var(--border)" }}>
+        <h3 style={{ fontFamily: "var(--font-heading)", fontSize: 20, marginBottom: 20 }}>Оставить отзыв</h3>
+        {status === "success" ? (
+          <p style={{ color: "var(--primary)", fontWeight: 600, textAlign: "center", padding: "20px 0" }}>Спасибо за ваш отзыв! 🙏</p>
+        ) : (
+          <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+            <input
+              placeholder="Ваше имя"
+              value={form.name}
+              onChange={e => setForm({ ...form, name: e.target.value })}
+              required
+              style={{ padding: "12px 16px", border: "var(--border)", borderRadius: 8, fontFamily: "inherit", fontSize: 15 }}
+            />
+            <div>
+              <p style={{ fontSize: 14, marginBottom: 8, color: "#666" }}>Оценка</p>
+              <div style={{ display: "flex", gap: 8 }}>
+                {[1, 2, 3, 4, 5].map(star => (
+                  <button
+                    key={star}
+                    type="button"
+                    onClick={() => setForm({ ...form, rating: star })}
+                    style={{ fontSize: 28, background: "none", border: "none", cursor: "pointer", opacity: star <= form.rating ? 1 : 0.3, transition: "opacity 0.2s" }}
+                  >⭐</button>
+                ))}
+              </div>
+            </div>
+            <textarea
+              placeholder="Расскажите о вашем визите..."
+              value={form.text}
+              onChange={e => setForm({ ...form, text: e.target.value })}
+              required
+              rows={4}
+              style={{ padding: "12px 16px", border: "var(--border)", borderRadius: 8, fontFamily: "inherit", fontSize: 15, resize: "vertical" }}
+            />
+            {status === "error" && <p style={{ color: "red", fontSize: 14 }}>Что-то пошло не так. Попробуйте ещё раз.</p>}
+            <button
+              type="submit"
+              disabled={status === "loading"}
+              className="btn-cta"
+              style={{ background: "var(--primary)", color: "white" }}
+            >
+              {status === "loading" ? "Отправляем..." : "Отправить отзыв"}
+            </button>
+          </form>
+        )}
+      </div>
+
+      {reviews.length > 0 && (
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))", gap: 20, maxWidth: 1100, margin: "0 auto" }}>
+          {reviews.map(r => (
+            <div key={r.id} style={{ background: "white", borderRadius: 16, padding: "24px", border: "var(--border)" }}>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 10 }}>
+                <strong style={{ fontFamily: "var(--font-heading)", fontSize: 16 }}>{r.name}</strong>
+                <span style={{ fontSize: 18 }}>{"⭐".repeat(r.rating)}</span>
+              </div>
+              <p style={{ color: "#444", lineHeight: 1.6, fontSize: 15 }}>{r.text}</p>
+              <p style={{ color: "#aaa", fontSize: 12, marginTop: 12 }}>
+                {new Date(r.created_at).toLocaleDateString("ru-RU", { day: "numeric", month: "long", year: "numeric" })}
+              </p>
+            </div>
+          ))}
+        </div>
+      )}
+    </section>
+  );
+}
+
 export default function Index() {
   const [showModal, setShowModal] = useState(false);
   return (
@@ -342,6 +450,8 @@ export default function Index() {
             </div>
           </div>
         </section>
+
+        <ReviewsSection />
 
         <section className="section-padding" id="contacts" style={{ borderTop: "var(--border)", padding: 0 }}>
           <div style={{ padding: "40px 20px 0" }}>
